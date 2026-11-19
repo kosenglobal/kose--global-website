@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light only">
+    <!-- kosen-site-v29 -->
+    <!--
+      Safari 27.3 Adaptive Dark Mode leaves a page alone when it declares
+      light+dark support (WebKit, 3 Nov 2026). The "only" keyword, used in v28,
+      was ignored in Safari 27.3 beta 1. We declare light dark so Adaptive Dark
+      Mode will not repaint the page, then force the light palette in CSS so
+      the design stays the approved light look in every scheme.
+      Dark Reader official opt-out: https://github.com/darkreader/darkreader/blob/main/CONTRIBUTING.md
+    -->
+    <meta name="color-scheme" content="light dark">
     <meta name="supported-color-schemes" content="light">
+    <meta name="darkreader-lock">
     <meta name="theme-color" content="#FFFFFF">
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: dark)">
     <title>Kosen Global | Values-Driven Legal Excellence</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' };</script>
@@ -20,21 +32,19 @@
             --beige: #FFFFFF;
             --cream: #F8F8F6;
             --dark-text: #0F2316;
-            color-scheme: light only;
-            color-scheme: only light;
+            color-scheme: light dark;
         }
 
         html {
             background-color: #FFFFFF;
-            color-scheme: light only;
-            color-scheme: only light;
+            color-scheme: light dark;
         }
         
         body {
             font-family: 'Hanken Grotesk', Arial, sans-serif;
             background-color: #FFFFFF;
             color: #0F2316;
-            color-scheme: light only;
+            color-scheme: light dark;
         }
         
         .heading-serif {
@@ -450,6 +460,130 @@
             }
             html.kosen-3d .reveal-3d { opacity: 1; }
         }
+
+        /* ===== v29 light-palette lock ===== */
+        html, body, #kosen-bg, #kosen-bg canvas,
+        html.kosen-3d, html.kosen-3d body, html.kosen-3d #kosen-bg {
+            background-color: #FFFFFF;
+            color: #0F2316;
+        }
+        .site-nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #0F2316;
+        }
+        .site-nav .nav-link { color: #0F2316; }
+        #mobile-menu { background-color: #FFFFFF; color: #0F2316; }
+
+        .btn-primary {
+            background-color: #2C5530;
+            color: #FFFFFF;
+            border-color: #2C5530;
+        }
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #1E3A22;
+            color: #FFFFFF;
+            border-color: #1E3A22;
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: #0F2316;
+        }
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background-color: #2C5530;
+            color: #FFFFFF;
+            border-color: #2C5530;
+        }
+        .btn-on-dark {
+            background-color: #FFFFFF;
+            color: #1E3A22;
+        }
+        .btn-on-dark:hover,
+        .btn-on-dark:focus {
+            background-color: #EEF3EF;
+            color: #1E3A22;
+        }
+
+        .card-line, .form-card, .modern-card {
+            background-color: #FFFFFF;
+            color: #0F2316;
+        }
+        .card-title { color: #0F2316; }
+        .site-footer {
+            background-color: #F7F8F6;
+            color: #0F2316;
+        }
+        .solutions-band {
+            background-color: #0F2316;
+            color: #FFFFFF;
+        }
+        .cta-band {
+            background-color: #1E3A22;
+            color: #FFFFFF;
+        }
+        input:not([type="hidden"]):not([type="submit"]),
+        select,
+        textarea,
+        .field {
+            color-scheme: light;
+            background-color: #FFFFFF;
+            color: #0F2316;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html, body, #kosen-bg, #kosen-bg canvas,
+            html.kosen-3d, html.kosen-3d body, html.kosen-3d #kosen-bg {
+                background-color: #FFFFFF;
+                color: #0F2316;
+            }
+            .site-nav {
+                background-color: rgba(255, 255, 255, 0.95);
+                color: #0F2316;
+            }
+            .site-nav .nav-link { color: #0F2316; }
+            #mobile-menu,
+            .card-line, .form-card, .modern-card {
+                background-color: #FFFFFF;
+                color: #0F2316;
+            }
+            .site-footer {
+                background-color: #F7F8F6;
+                color: #0F2316;
+            }
+            .btn-primary {
+                background-color: #2C5530;
+                color: #FFFFFF;
+                border-color: #2C5530;
+            }
+            .btn-secondary {
+                background-color: transparent;
+                color: #0F2316;
+            }
+            .btn-on-dark {
+                background-color: #FFFFFF;
+                color: #1E3A22;
+            }
+            .hero-title, .hero-lede, .hero-lede .hero-lede-sub,
+            .section-header, .card-title, body, .section-lede {
+                color: #0F2316;
+            }
+            html.kosen-3d .hero-title { color: #0F2316 !important; }
+            html.kosen-3d .hero-lede,
+            html.kosen-3d .hero-lede .hero-lede-sub { color: #0F2316; }
+            #solutions .section-header,
+            .solutions-band, .cta-band { color: #FFFFFF; }
+            .solutions-band { background-color: #0F2316; }
+            .cta-band { background-color: #1E3A22; }
+            input:not([type="hidden"]):not([type="submit"]),
+            select,
+            textarea,
+            .field {
+                color-scheme: light;
+                background-color: #FFFFFF;
+                color: #0F2316;
+            }
+        }
     </style>
 
     <link rel="icon" href="data:,">
@@ -491,11 +625,11 @@
 
                 <div class="hidden md:flex items-center gap-x-4">
                     <a href="#contact" 
-                       class="btn-sq px-5 py-2.5 text-[13px] font-semibold tracking-[0.04em] text-[#0F2316] border border-[#0F2316]/25 rounded-[2px] hover:border-[#2C5530] hover:text-[#2C5530] transition-all">
+                       class="btn-sq btn-secondary px-5 py-2.5 text-[13px] font-semibold tracking-[0.04em] text-[#0F2316] border border-[#0F2316]/25 rounded-[2px] hover:border-[#2C5530] hover:text-[#2C5530] transition-all">
                         Contact Us
                     </a>
                     <a href="https://kosenlaw.blog" target="_blank" rel="noopener"
-                       class="premium-btn btn-sq px-5 py-2.5 text-[13px] font-semibold tracking-[0.04em] bg-[#2C5530] text-white rounded-[2px] border border-[#2C5530] hover:bg-[#1E3A22]">
+                       class="premium-btn btn-sq btn-primary px-5 py-2.5 text-[13px] font-semibold tracking-[0.04em] bg-[#2C5530] text-white rounded-[2px] border border-[#2C5530] hover:bg-[#1E3A22]">
                         Blog
                     </a>
                 </div>
@@ -519,7 +653,7 @@
                 <a href="#values" class="py-3 border-b border-[#0F2316]/[0.08] text-[#0F2316]">Charter</a>
                 <div class="pt-4 flex flex-col gap-y-3">
                     <a href="#contact" class="py-3 text-center border border-[#0F2316]/25 rounded-[2px] text-[#0F2316] font-semibold">Contact Us</a>
-                    <a href="https://kosenlaw.blog" target="_blank" rel="noopener" class="py-3 text-center bg-[#2C5530] text-white rounded-[2px] font-semibold">Blog</a>
+                    <a href="https://kosenlaw.blog" target="_blank" rel="noopener" class="btn-primary py-3 text-center bg-[#2C5530] text-white rounded-[2px] font-semibold">Blog</a>
                 </div>
             </div>
         </div>
@@ -540,12 +674,12 @@
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="#solutions" 
-                   class="premium-btn btn-sq group w-full sm:w-auto inline-flex items-center justify-center gap-x-3 px-8 py-4 text-[15px] font-semibold tracking-[0.03em] bg-[#2C5530] text-white rounded-[2px] border border-[#2C5530] hover:bg-[#1E3A22]">
+                   class="premium-btn btn-sq btn-primary group w-full sm:w-auto inline-flex items-center justify-center gap-x-3 px-8 py-4 text-[15px] font-semibold tracking-[0.03em] bg-[#2C5530] text-white rounded-[2px] border border-[#2C5530] hover:bg-[#1E3A22]">
                     Capabilities
                     <i class="fa-solid fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
                 </a>
                 <a href="#case-studies" 
-                   class="premium-btn btn-sq w-full sm:w-auto inline-flex items-center justify-center gap-x-3 px-8 py-4 text-[15px] font-semibold tracking-[0.03em] border border-[#0F2316]/30 text-[#0F2316] rounded-[2px] hover:border-[#2C5530] hover:bg-[#2C5530] hover:text-white">
+                   class="premium-btn btn-sq btn-secondary w-full sm:w-auto inline-flex items-center justify-center gap-x-3 px-8 py-4 text-[15px] font-semibold tracking-[0.03em] border border-[#0F2316]/30 text-[#0F2316] rounded-[2px] hover:border-[#2C5530] hover:bg-[#2C5530] hover:text-white">
                     Case Studies
                 </a>
             </div>
@@ -714,7 +848,7 @@
 
         <div class="mt-12 md:mt-14 text-center">
             <a href="https://kosenlaw.blog" target="_blank" rel="noopener"
-               class="premium-btn btn-sq inline-flex items-center justify-center gap-x-3 px-8 py-4 text-[15px] font-semibold tracking-[0.03em] border border-[#0F2316]/30 text-[#0F2316] rounded-[2px] hover:border-[#2C5530] hover:bg-[#2C5530] hover:text-white">
+               class="premium-btn btn-sq btn-secondary inline-flex items-center justify-center gap-x-3 px-8 py-4 text-[15px] font-semibold tracking-[0.03em] border border-[#0F2316]/30 text-[#0F2316] rounded-[2px] hover:border-[#2C5530] hover:bg-[#2C5530] hover:text-white">
                 Read more on our blog
                 <i class="fa-solid fa-arrow-right text-sm"></i>
             </a>
@@ -906,7 +1040,7 @@
                 <p class="max-w-md mx-auto text-[#EEF4EF] text-[16px] leading-[1.7] mb-10">Whether you're an aspiring legal professional or a forward-thinking enterprise, Kosen is ready to partner with you.</p>
                 
                 <a href="#contact" 
-                   class="btn-sq inline-flex items-center justify-center gap-x-3 px-8 py-4 bg-white text-[#1E3A22] font-semibold tracking-[0.03em] rounded-[2px] hover:bg-[#EEF3EF] transition-all text-[15px]">
+                   class="btn-sq btn-on-dark inline-flex items-center justify-center gap-x-3 px-8 py-4 bg-white text-[#1E3A22] font-semibold tracking-[0.03em] rounded-[2px] hover:bg-[#EEF3EF] transition-all text-[15px]">
                     Start the Conversation
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -988,7 +1122,7 @@
                     </div>
                     
                     <button type="submit" 
-                            class="mt-7 w-full premium-btn btn-sq py-4 bg-[#2C5530] hover:bg-[#1E3A22] text-white font-semibold tracking-[0.04em] rounded-[2px] flex items-center justify-center gap-x-3 text-[15px]">
+                            class="mt-7 w-full premium-btn btn-sq btn-primary py-4 bg-[#2C5530] hover:bg-[#1E3A22] text-white font-semibold tracking-[0.04em] rounded-[2px] flex items-center justify-center gap-x-3 text-[15px]">
                         Send Message
                         <i class="fa-solid fa-paper-plane text-sm"></i>
                     </button>
