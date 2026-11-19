@@ -312,12 +312,12 @@
             text-shadow: 0 1px 2px rgba(255,255,255,0.4);
         }
         html.kosen-3d .hero-lede {
-            color: #1E3A22;
+            color: #0F2316;
             font-weight: 500;
             text-shadow: 0 1px 2px rgba(255,255,255,0.35);
         }
         html.kosen-3d .hero-lede .hero-lede-sub {
-            color: #2C5530;
+            color: #0F2316;
             font-weight: 500;
             text-shadow: 0 1px 2px rgba(255,255,255,0.35);
         }
@@ -519,9 +519,9 @@
                 Lawyers who execute<br class="hidden md:block"> like operators.
             </h1>
             
-            <p class="hero-lede max-w-5xl mx-auto text-lg md:text-[20px] leading-[1.6] text-[#1E3A22] font-medium mb-11">
-                <span class="font-semibold text-[#1E3A22]">Kosen Global</span> <span class="text-[#1E3A22] mx-1">|</span> We are smart lawyers who handle the complicated parts of the business for you.
-                <span class="hero-lede-sub block mt-3 text-[#2C5530] text-base md:text-lg font-medium">Kosen enables businesses to operate across fast-moving markets.</span>
+            <p class="hero-lede max-w-5xl mx-auto text-lg md:text-[20px] leading-[1.6] text-[#0F2316] font-medium mb-11">
+                <span class="font-semibold text-[#0F2316]">Kosen Global</span> <span class="text-[#0F2316] mx-1">|</span> We are smart lawyers who handle the complicated parts of the business for you.
+                <span class="hero-lede-sub block mt-3 text-[#0F2316] text-base md:text-lg font-medium">Kosen enables businesses to operate across fast-moving markets.</span>
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -1245,6 +1245,7 @@ const GREEN = 0x2C5530;
 const GREEN_DEEP = 0x1E3A22;
 const GREEN_SOFT = 0x5C7A5F;
 const GOLD = 0xD4B97A;
+const GOLD_PULSE = 0xE3CC94;
 const CITIES = [
     { name: 'UK',   lat: 51.51, lon: -0.13 },
     { name: 'UAE',  lat: 25.20, lon: 55.27 },
@@ -1523,15 +1524,15 @@ async function initKosen3D() {
 
     const arcPaths = [];
     const arcMat = new THREE.LineBasicMaterial({
-        color: GREEN,
+        color: GOLD,
         transparent: true,
-        opacity: 0.62,
+        opacity: 0.72,
         depthWrite: false
     });
     const tubeMat = new THREE.MeshBasicMaterial({
-        color: GREEN,
+        color: GOLD,
         transparent: true,
-        opacity: 0.58,
+        opacity: 0.7,
         depthWrite: false
     });
     ARC_PAIRS.forEach(([i, j], idx) => {
@@ -1552,7 +1553,7 @@ async function initKosen3D() {
     });
     globeSpin.rotation.y = -0.95;
 
-    const pulseTex = makeCircleSprite([44, 85, 48], 128, true);
+    const pulseTex = makeCircleSprite([227, 204, 148], 128, true);
     const pulses = [];
     const pulseCount = isMobile ? 1 : 2;
     arcPaths.forEach((path, idx) => {
@@ -1579,13 +1580,13 @@ async function initKosen3D() {
     const ringMat = new THREE.MeshBasicMaterial({
         color: GOLD,
         transparent: true,
-        opacity: 0.22,
+        opacity: 0.36,
         depthWrite: false
     });
     const ringA = new THREE.Mesh(ringGeo, ringMat);
     ringA.rotation.x = Math.PI / 2.35;
     const ringB = new THREE.Mesh(ringGeo, ringMat.clone());
-    ringB.material.opacity = 0.14;
+    ringB.material.opacity = 0.26;
     ringB.rotation.x = Math.PI / 1.7;
     ringB.rotation.y = 0.6;
     globeSpin.add(ringA, ringB);
