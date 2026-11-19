@@ -261,9 +261,198 @@
         .value-card, .solution-card { opacity: 1 !important; }
         .field::placeholder { color: #3E5045; opacity: 1; }
         select.field { color: #0F2316; }
+        /* ===== v20 full 3D experience ===== */
+        #kosen-bg {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            display: none;
+        }
+        #kosen-bg canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        html.kosen-3d #kosen-bg { display: block; }
+        html.kosen-3d,
+        html.kosen-3d body { background: transparent; }
+        html.kosen-3d body > *:not(#kosen-bg):not(nav):not(.scene-vignette) {
+            position: relative;
+            z-index: 1;
+        }
+        html.kosen-3d .scene-vignette {
+            display: block;
+            position: fixed !important;
+            inset: 0;
+            z-index: 0;
+            height: 100% !important;
+        }
+        html.kosen-3d .hero {
+            background: transparent;
+        }
+        html.kosen-3d .hero-lines { opacity: 0.28; }
+        html.kosen-3d .case-band { background: transparent !important; }
+        html.kosen-3d .site-footer { background: rgba(247, 248, 246, 0.88); }
+        .hero-veil {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            background:
+                radial-gradient(ellipse 70% 58% at 50% 42%, rgba(255,255,255,0.84) 0%, rgba(255,255,255,0.58) 38%, rgba(255,255,255,0.18) 64%, rgba(255,255,255,0) 100%),
+                linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 16%, rgba(255,255,255,0) 80%, rgba(255,255,255,0.5) 100%);
+        }
+        html.kosen-3d .hero-veil { opacity: 1; }
+        html.kosen-3d .hero-title {
+            color: #0F2316 !important;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.4);
+        }
+        html.kosen-3d .hero-lede {
+            color: #1E3A22;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.35);
+        }
+        html.kosen-3d .hero-lede .hero-lede-sub {
+            color: #2C5530;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.35);
+        }
+        html.kosen-3d .hero-marks,
+        html.kosen-3d .hero-marks span,
+        html.kosen-3d .hero-marks i {
+            color: #1E3A22;
+        }
+        .scene-vignette {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            display: none;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0) 48%, rgba(238,243,239,0.28) 100%);
+        }
+        html.kosen-3d .scene-vignette { display: block; }
+
+        /* Buttons: subtle 3D lift / press */
+        html.kosen-3d .premium-btn,
+        html.kosen-3d .btn-sq {
+            transform: translateY(0) scale(1);
+            box-shadow: 0 1px 0 rgba(15,35,22,0.05), 0 10px 22px -16px rgba(44,85,48,0.45);
+            transition: transform .22s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow .22s ease, background-color .25s ease, color .25s ease, border-color .25s ease;
+        }
+        html.kosen-3d .premium-btn:hover,
+        html.kosen-3d a.btn-sq:hover,
+        html.kosen-3d button.btn-sq:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px -18px rgba(44,85,48,0.6), 0 2px 0 rgba(15,35,22,0.04);
+        }
+        html.kosen-3d .premium-btn:active,
+        html.kosen-3d a.btn-sq:active,
+        html.kosen-3d button.btn-sq:active {
+            transform: translateY(1px) scale(0.985);
+            box-shadow: 0 3px 8px -4px rgba(44,85,48,0.35);
+        }
+
+        /* Cards: perspective tilt + glare + reveal */
+        html.kosen-3d .tilt-card { transform: none; }
+        html.kosen-3d .value-card { transform-style: preserve-3d; }
+        html.kosen-3d .value-card:hover,
+        html.kosen-3d .solution-card:hover,
+        html.kosen-3d .sector-pill:hover,
+        html.kosen-3d .card-line:hover {
+            transform: none;
+        }
+        html.kosen-3d .card-3d {
+            position: relative;
+            transform-style: preserve-3d;
+            transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(0, var(--ty, 0px), var(--tz, 0px));
+            transition: box-shadow .35s ease, border-color .3s ease;
+            will-change: transform;
+        }
+        html.kosen-3d .card-3d.is-tilting {
+            transition: box-shadow .35s ease, border-color .3s ease;
+        }
+        html.kosen-3d .card-glare {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            border-radius: inherit;
+            background: radial-gradient(circle at var(--gx, 50%) var(--gy, 0%), rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.12) 34%, transparent 62%);
+            opacity: 0;
+            transition: opacity .3s ease;
+            z-index: 4;
+            mix-blend-mode: soft-light;
+        }
+        html.kosen-3d .card-3d.is-tilting .card-glare { opacity: 1; }
+        html.kosen-3d .solutions-band {
+            perspective: 1400px;
+            box-shadow: inset 0 30px 70px rgba(0,0,0,0.18), inset 0 -24px 50px rgba(0,0,0,0.12);
+        }
+        html.kosen-3d .solutions-band .solution-card {
+            transform-style: preserve-3d;
+            background-image: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0));
+        }
+        html.kosen-3d .reveal-3d {
+            opacity: 0;
+            transform: perspective(1100px) rotateX(12deg) translate3d(0, 28px, -36px);
+            transition: opacity .85s ease, transform .95s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html.kosen-3d .reveal-3d.is-in {
+            opacity: 1;
+            /* Keep --rx/--ry so mouse tilt still works after the reveal */
+            transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(0, var(--ty, 0px), var(--tz, 0px));
+        }
+        html.kosen-3d .card-line {
+            background: rgba(255,255,255,0.96);
+            box-shadow: 0 22px 44px -30px rgba(15,35,22,0.35), 0 1px 0 rgba(15,35,22,0.04);
+        }
+
+        @media (max-width: 767px) {
+            html.kosen-3d .hero-veil {
+                background: radial-gradient(ellipse 100% 70% at 50% 40%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.82) 42%, rgba(255,255,255,0.4) 70%, rgba(255,255,255,0.1) 100%);
+            }
+            html.kosen-3d .card-3d { transform: none; }
+            html.kosen-3d .reveal-3d {
+                transform: translate3d(0, 16px, 0);
+            }
+            html.kosen-3d .reveal-3d.is-in { transform: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html.kosen-3d .premium-btn,
+            html.kosen-3d .btn-sq,
+            html.kosen-3d .premium-btn:hover,
+            html.kosen-3d a.btn-sq:hover,
+            html.kosen-3d .premium-btn:active,
+            html.kosen-3d .card-3d,
+            html.kosen-3d .reveal-3d,
+            html.kosen-3d .reveal-3d.is-in,
+            html.kosen-3d .hero-veil {
+                transition: none !important;
+                transform: none !important;
+            }
+            html.kosen-3d .reveal-3d { opacity: 1; }
+        }
     </style>
+
+    <link rel="icon" href="data:,">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
+        }
+    }
+    </script>
 </head>
 <body class="antialiased">
+    <div id="kosen-bg" aria-hidden="true"><canvas></canvas></div>
+    <div class="scene-vignette" aria-hidden="true"></div>
+
     <!-- Navbar -->
     <nav class="fixed top-0 left-0 right-0 z-50 site-nav bg-[#FFFFFF]/95 backdrop-blur-lg border-b border-[#0F2316]/10">
         <div class="max-w-6xl mx-auto px-6 md:px-8">
@@ -330,9 +519,9 @@
                 Lawyers who execute<br class="hidden md:block"> like operators.
             </h1>
             
-            <p class="max-w-5xl mx-auto text-lg md:text-[20px] leading-[1.6] text-[#0F2316] font-normal mb-11">
-                <span class="font-semibold text-[#1E3A22]">Kosen Global</span> <span class="text-[#1E3A22]/50 mx-1">|</span> We are smart lawyers who handle the complicated parts of the business for you.
-                <span class="block mt-3 text-[#0F2316]/80 text-base md:text-lg">Kosen enables businesses to operate across fast-moving markets.</span>
+            <p class="hero-lede max-w-5xl mx-auto text-lg md:text-[20px] leading-[1.6] text-[#1E3A22] font-medium mb-11">
+                <span class="font-semibold text-[#1E3A22]">Kosen Global</span> <span class="text-[#1E3A22] mx-1">|</span> We are smart lawyers who handle the complicated parts of the business for you.
+                <span class="hero-lede-sub block mt-3 text-[#2C5530] text-base md:text-lg font-medium">Kosen enables businesses to operate across fast-moving markets.</span>
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -348,17 +537,17 @@
             </div>
 
             <div class="mt-12 pt-6 border-t border-[#0F2316]/10 hero-marks max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-3 text-[11.5px] uppercase tracking-[0.14em] sm:tracking-[0.2em]">
-                <div class="flex items-center gap-x-2.5 text-[#0F2316] whitespace-nowrap">
+                <div class="flex items-center gap-x-2.5 text-[#1E3A22] whitespace-nowrap">
                     <i class="fa-solid fa-globe text-[#1E3A22]"></i>
                     <span class="font-semibold">Global Reach</span>
                 </div>
                 <div class="hidden sm:block w-px h-3 bg-[#0F2316]/20"></div>
-                <div class="flex items-center gap-x-2.5 text-[#0F2316] whitespace-nowrap">
+                <div class="flex items-center gap-x-2.5 text-[#1E3A22] whitespace-nowrap">
                     <i class="fa-solid fa-award text-[#1E3A22]"></i>
                     <span class="font-semibold">Excellent Talent</span>
                 </div>
                 <div class="hidden sm:block w-px h-3 bg-[#0F2316]/20"></div>
-                <div class="flex items-center gap-x-2.5 text-[#0F2316] whitespace-nowrap">
+                <div class="flex items-center gap-x-2.5 text-[#1E3A22] whitespace-nowrap">
                     <i class="fa-solid fa-bolt text-[#1E3A22]"></i>
                     <span class="font-semibold">Speedy Response</span>
                 </div>
@@ -368,7 +557,7 @@
         <!-- Subtle decorative background elements -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="hero-lines absolute inset-0"></div>
-            
+            <div class="hero-veil"></div>
         </div>
     </header>
 
@@ -894,6 +1083,7 @@
 
         // 3D Tilt effect for value cards
         function setupTiltEffect() {
+            if (window.__kosen3d) return;
             const tiltCards = document.querySelectorAll('.tilt-card');
             
             tiltCards.forEach(card => {
@@ -987,6 +1177,7 @@
 
         // Subtle parallax / scroll effects (optional premium touch)
         function setupScrollEffects() {
+            if (window.__kosen3d) return;
             // Fade in elements on scroll
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1046,6 +1237,682 @@
         window.addEventListener('load', initializeWebsite);
         
         // Make sure Tailwind classes work well on dynamic content
+    </script>
+    <script type="module">
+import * as THREE from 'three';
+
+const GREEN = 0x2C5530;
+const GREEN_DEEP = 0x1E3A22;
+const GREEN_SOFT = 0x5C7A5F;
+const GOLD = 0xD4B97A;
+const CITIES = [
+    { name: 'UK',   lat: 51.51, lon: -0.13 },
+    { name: 'UAE',  lat: 25.20, lon: 55.27 },
+    { name: 'India',lat: 28.61, lon: 77.21 },
+    { name: 'US',   lat: 40.71, lon: -74.01 }
+];
+const ARC_PAIRS = [
+    [0, 1], [1, 2], [2, 0], [0, 3], [3, 1], [3, 2]
+];
+
+function supportsWebGL() {
+    try {
+        const c = document.createElement('canvas');
+        return !!(c.getContext('webgl2') || c.getContext('webgl') || c.getContext('experimental-webgl'));
+    } catch (e) {
+        return false;
+    }
+}
+
+function latLonToVec3(lat, lon, radius) {
+    const phi = (90 - lat) * Math.PI / 180;
+    const theta = (lon + 180) * Math.PI / 180;
+    return new THREE.Vector3(
+        -radius * Math.sin(phi) * Math.cos(theta),
+        radius * Math.cos(phi),
+        radius * Math.sin(phi) * Math.sin(theta)
+    );
+}
+
+function makeCircleSprite(rgb, size, soft) {
+    const s = size || 128;
+    const cv = document.createElement('canvas');
+    cv.width = s;
+    cv.height = s;
+    const ctx = cv.getContext('2d');
+    const g = ctx.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+    const [r, gch, b] = rgb;
+    if (soft) {
+        g.addColorStop(0, `rgba(${r},${gch},${b},1)`);
+        g.addColorStop(0.28, `rgba(${r},${gch},${b},0.55)`);
+        g.addColorStop(0.62, `rgba(${r},${gch},${b},0.12)`);
+        g.addColorStop(1, `rgba(${r},${gch},${b},0)`);
+    } else {
+        g.addColorStop(0, `rgba(${r},${gch},${b},1)`);
+        g.addColorStop(0.45, `rgba(${r},${gch},${b},1)`);
+        g.addColorStop(0.7, `rgba(${r},${gch},${b},0.35)`);
+        g.addColorStop(1, `rgba(${r},${gch},${b},0)`);
+    }
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, s, s);
+    const tex = new THREE.CanvasTexture(cv);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.needsUpdate = true;
+    return tex;
+}
+
+function fibonacciPoints(count, radius) {
+    const positions = new Float32Array(count * 3);
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < count; i++) {
+        const y = 1 - (i / (count - 1)) * 2;
+        const r = Math.sqrt(Math.max(0, 1 - y * y));
+        const theta = golden * i;
+        positions[i * 3] = Math.cos(theta) * r * radius;
+        positions[i * 3 + 1] = y * radius;
+        positions[i * 3 + 2] = Math.sin(theta) * r * radius;
+    }
+    return positions;
+}
+
+function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+function lerp(a, b, t) { return a + (b - a) * t; }
+function easeInOut(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+
+function slerpUnit(a, b, t) {
+    const aa = a.clone().normalize();
+    const bb = b.clone().normalize();
+    const dot = clamp(aa.dot(bb), -1, 1);
+    if (dot > 0.9995) {
+        return aa.lerp(bb, t).normalize();
+    }
+    const theta = Math.acos(dot);
+    const sinT = Math.sin(theta) || 1;
+    const wa = Math.sin((1 - t) * theta) / sinT;
+    const wb = Math.sin(t * theta) / sinT;
+    return new THREE.Vector3(
+        aa.x * wa + bb.x * wb,
+        aa.y * wa + bb.y * wb,
+        aa.z * wa + bb.z * wb
+    ).normalize();
+}
+
+function makeArcPoints(a, b, radius, loft, segments) {
+    const pts = [];
+    for (let i = 0; i <= segments; i++) {
+        const t = i / segments;
+        const v = slerpUnit(a, b, t);
+        const lift = Math.sin(t * Math.PI);
+        v.multiplyScalar(radius * (1 + (loft - 1) * lift));
+        pts.push(v);
+    }
+    return pts;
+}
+
+
+async function initKosen3D() {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Scene density and parking follow viewport width only.
+    // Headless browsers often report hover:none, which must not be treated as a phone.
+    let isMobile = window.innerWidth < 768;
+
+    if (!supportsWebGL()) return null;
+
+    const holder = document.getElementById('kosen-bg');
+    const canvas = holder && holder.querySelector('canvas');
+    if (!canvas) return null;
+
+    let renderer;
+    try {
+        renderer = new THREE.WebGLRenderer({
+            canvas,
+            antialias: !isMobile,
+            alpha: false,
+            powerPreference: isMobile ? 'low-power' : 'high-performance',
+            failIfMajorPerformanceCaveat: false,
+            preserveDrawingBuffer: true
+        });
+    } catch (err) {
+        return null;
+    }
+
+    const ctx = renderer.getContext();
+    if (!ctx) {
+        renderer.dispose();
+        return null;
+    }
+
+    renderer.setClearColor(0xffffff, 1);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff);
+    scene.fog = new THREE.Fog(0xffffff, 8.5, 18);
+
+    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 40);
+    camera.position.set(0, 0.12, 5.4);
+
+    const ambient = new THREE.AmbientLight(0xffffff, 1.05);
+    scene.add(ambient);
+    const key = new THREE.DirectionalLight(0xf6faf6, 0.55);
+    key.position.set(3.2, 2.4, 4.6);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0x8eaa92, 0.25);
+    fill.position.set(-3, -1, 2);
+    scene.add(fill);
+
+    const root = new THREE.Group();
+    scene.add(root);
+
+    const globeAnchor = new THREE.Group();
+    root.add(globeAnchor);
+    const globeSpin = new THREE.Group();
+    globeAnchor.add(globeSpin);
+
+    const RADIUS = 1.55;
+    const pointCount = isMobile ? 900 : 2400;
+
+    const core = new THREE.Mesh(
+        new THREE.SphereGeometry(RADIUS * 0.985, isMobile ? 32 : 64, isMobile ? 32 : 64),
+        new THREE.MeshStandardMaterial({
+            color: 0xF3F6F3,
+            roughness: 0.72,
+            metalness: 0.04,
+            transparent: true,
+            opacity: 0.5
+        })
+    );
+    globeSpin.add(core);
+
+    const atmosMat = new THREE.ShaderMaterial({
+        uniforms: {
+            color: { value: new THREE.Color(GREEN) },
+            intensity: { value: 0.62 }
+        },
+        vertexShader: `
+            varying vec3 vNormal;
+            void main() {
+                vNormal = normalize(normalMatrix * normal);
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `,
+        fragmentShader: `
+            uniform vec3 color;
+            uniform float intensity;
+            varying vec3 vNormal;
+            void main() {
+                float f = pow(1.0 - abs(vNormal.z), 2.35);
+                gl_FragColor = vec4(color, clamp(f * intensity, 0.0, 0.55));
+            }
+        `,
+        transparent: true,
+        depthWrite: false,
+        side: THREE.BackSide
+    });
+    const atmos = new THREE.Mesh(new THREE.SphereGeometry(RADIUS * 1.085, 32, 32), atmosMat);
+    globeSpin.add(atmos);
+
+    const pointTex = makeCircleSprite([44, 85, 48], 96, false);
+    const pointGeo = new THREE.BufferGeometry();
+    pointGeo.setAttribute('position', new THREE.BufferAttribute(fibonacciPoints(pointCount, RADIUS * 1.001), 3));
+    const points = new THREE.Points(pointGeo, new THREE.PointsMaterial({
+        size: isMobile ? 0.032 : 0.03,
+        map: pointTex,
+        transparent: true,
+        depthWrite: false,
+        color: GREEN_DEEP,
+        sizeAttenuation: true,
+        opacity: 0.96
+    }));
+    globeSpin.add(points);
+
+    const grid = new THREE.Group();
+    const gridMat = new THREE.LineBasicMaterial({
+        color: GREEN,
+        transparent: true,
+        opacity: 0.32,
+        depthWrite: false
+    });
+    const meridians = isMobile ? 6 : 10;
+    const parallels = isMobile ? 4 : 7;
+    for (let i = 0; i < meridians; i++) {
+        const lon = (i / meridians) * 360 - 180;
+        const pts = [];
+        for (let j = 0; j <= 96; j++) {
+            const lat = -90 + (180 * j / 96);
+            pts.push(latLonToVec3(lat, lon, RADIUS * 1.004));
+        }
+        grid.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), gridMat));
+    }
+    for (let i = 1; i <= parallels; i++) {
+        const lat = -90 + (180 * i / (parallels + 1));
+        if (Math.abs(lat) > 78) continue;
+        const pts = [];
+        for (let j = 0; j <= 96; j++) {
+            const lon = -180 + (360 * j / 96);
+            pts.push(latLonToVec3(lat, lon, RADIUS * 1.004));
+        }
+        grid.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts), gridMat));
+    }
+    globeSpin.add(grid);
+
+    const cityVecs = CITIES.map((c) => latLonToVec3(c.lat, c.lon, RADIUS));
+    const markerTex = makeCircleSprite([30, 58, 34], 128, true);
+    const markerMat = new THREE.SpriteMaterial({
+        map: markerTex,
+        transparent: true,
+        depthWrite: false,
+        opacity: 0.95
+    });
+    cityVecs.forEach((v) => {
+        const sprite = new THREE.Sprite(markerMat);
+        const n = v.clone().normalize();
+        sprite.position.copy(n.multiplyScalar(RADIUS * 1.03));
+        sprite.scale.setScalar(isMobile ? 0.16 : 0.2);
+        globeSpin.add(sprite);
+
+        const coreDot = new THREE.Mesh(
+            new THREE.SphereGeometry(0.018, 12, 12),
+            new THREE.MeshBasicMaterial({ color: GREEN_DEEP })
+        );
+        coreDot.position.copy(v.clone().normalize().multiplyScalar(RADIUS * 1.02));
+        globeSpin.add(coreDot);
+    });
+
+    const arcPaths = [];
+    const arcMat = new THREE.LineBasicMaterial({
+        color: GREEN,
+        transparent: true,
+        opacity: 0.62,
+        depthWrite: false
+    });
+    const tubeMat = new THREE.MeshBasicMaterial({
+        color: GREEN,
+        transparent: true,
+        opacity: 0.58,
+        depthWrite: false
+    });
+    ARC_PAIRS.forEach(([i, j], idx) => {
+        const a = cityVecs[i].clone().normalize();
+        const b = cityVecs[j].clone().normalize();
+        const loft = 1.14 + (idx % 3) * 0.04;
+        const pts = makeArcPoints(a, b, RADIUS, loft, 80);
+        if (isMobile) {
+            globeSpin.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), arcMat));
+        } else {
+            const tube = new THREE.Mesh(
+                new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 80, 0.009, 8, false),
+                tubeMat
+            );
+            globeSpin.add(tube);
+        }
+        arcPaths.push(pts);
+    });
+    globeSpin.rotation.y = -0.95;
+
+    const pulseTex = makeCircleSprite([44, 85, 48], 128, true);
+    const pulses = [];
+    const pulseCount = isMobile ? 1 : 2;
+    arcPaths.forEach((path, idx) => {
+        for (let p = 0; p < pulseCount; p++) {
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({
+                map: pulseTex,
+                transparent: true,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending,
+                opacity: 0.9
+            }));
+            spr.scale.setScalar(isMobile ? 0.16 : 0.22);
+            globeSpin.add(spr);
+            pulses.push({
+                spr,
+                path,
+                t: (idx * 0.17 + p * 0.5) % 1,
+                speed: 0.08 + (idx % 4) * 0.015
+            });
+        }
+    });
+
+    const ringGeo = new THREE.TorusGeometry(RADIUS * 1.22, 0.006, 8, isMobile ? 64 : 128);
+    const ringMat = new THREE.MeshBasicMaterial({
+        color: GOLD,
+        transparent: true,
+        opacity: 0.22,
+        depthWrite: false
+    });
+    const ringA = new THREE.Mesh(ringGeo, ringMat);
+    ringA.rotation.x = Math.PI / 2.35;
+    const ringB = new THREE.Mesh(ringGeo, ringMat.clone());
+    ringB.material.opacity = 0.14;
+    ringB.rotation.x = Math.PI / 1.7;
+    ringB.rotation.y = 0.6;
+    globeSpin.add(ringA, ringB);
+
+    const floatGroup = new THREE.Group();
+    root.add(floatGroup);
+    const paneCount = isMobile ? 3 : 6;
+    const panes = [];
+    for (let i = 0; i < paneCount; i++) {
+        const w = 0.7 + (i % 3) * 0.28;
+        const h = 0.95 + ((i + 1) % 3) * 0.32;
+        const geo = new THREE.PlaneGeometry(w, h);
+        const mat = new THREE.MeshBasicMaterial({
+            color: GREEN,
+            transparent: true,
+            opacity: 0,
+            side: THREE.DoubleSide,
+            depthWrite: false
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        const edges = new THREE.LineSegments(
+            new THREE.EdgesGeometry(geo),
+            new THREE.LineBasicMaterial({ color: GREEN, transparent: true, opacity: 0, depthWrite: false })
+        );
+        mesh.add(edges);
+        const angle = (i / paneCount) * Math.PI * 2 + 0.35;
+        const rad = 3.3 + (i % 3) * 0.4;
+        let px = Math.cos(angle) * rad;
+        if (Math.abs(px) < 3.05) px = (px < 0 ? -1 : 1) * (3.1 + (i % 3) * 0.25);
+        mesh.position.set(px, ((i % 5) - 2) * 0.7, Math.sin(angle) * rad - 3.8);
+        mesh.rotation.set(0.35 + i * 0.16, angle, 0.12 * i);
+        floatGroup.add(mesh);
+        panes.push({
+            mesh,
+            edges,
+            base: mesh.position.clone(),
+            rotSpeed: 0.08 + i * 0.01,
+            phase: i * 0.7
+        });
+    }
+
+    const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+    const onMouseMove = (e) => {
+        if (isMobile || reducedMotion) return;
+        mouse.tx = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.ty = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+
+    const scrollState = { hero: 0, page: 0 };
+    const heroEl = document.querySelector('header.hero');
+    const veil = document.querySelector('.hero-veil');
+
+    function readScroll() {
+        const hy = heroEl ? heroEl.offsetHeight : window.innerHeight;
+        const heroProg = clamp(window.scrollY / Math.max(hy * 0.92, 1), 0, 1);
+        const doc = document.documentElement;
+        const maxScroll = Math.max(doc.scrollHeight - window.innerHeight, 1);
+        scrollState.hero = heroProg;
+        scrollState.page = clamp(window.scrollY / maxScroll, 0, 1);
+        if (veil) veil.style.opacity = String(1 - easeInOut(heroProg) * 0.92);
+    }
+
+    window.addEventListener('scroll', readScroll, { passive: true });
+    if (window.gsap && window.ScrollTrigger && !reducedMotion) {
+        try {
+            window.gsap.registerPlugin(window.ScrollTrigger);
+            window.ScrollTrigger.create({
+                start: 0,
+                end: 'max',
+                onUpdate: readScroll
+            });
+        } catch (err) {
+            /* native scroll listener already attached */
+        }
+    }
+    readScroll();
+
+    let running = false;
+    let raf = 0;
+    let visibleTab = document.visibilityState !== 'hidden';
+    let canvasOnScreen = true;
+    const clock = new THREE.Clock();
+
+    function applyLayout(heroP) {
+        const t = easeInOut(heroP);
+        const parkedX = isMobile ? 0.12 : 2.18;
+        const parkedY = isMobile ? 0.7 : 0.02;
+        globeAnchor.position.set(
+            lerp(isMobile ? 0 : 0.04, parkedX, t),
+            lerp(-0.06, parkedY, t),
+            lerp(0, isMobile ? -0.3 : -0.45, t)
+        );
+        const sc = lerp(isMobile ? 0.95 : 1.12, isMobile ? 0.32 : 0.4, t);
+        globeAnchor.scale.setScalar(sc);
+        globeAnchor.visible = !(isMobile && t > 0.92);
+        const paneOpacity = clamp((heroP - 0.28) / 0.4, 0, isMobile ? 0.03 : 0.045);
+        const edgeOpacity = clamp((heroP - 0.28) / 0.4, 0, isMobile ? 0.1 : 0.16);
+        panes.forEach((p) => {
+            p.mesh.material.opacity = paneOpacity;
+            p.edges.material.opacity = edgeOpacity;
+        });
+        camera.position.z = lerp(5.4, 5.85, t);
+        camera.position.x = lerp(0, isMobile ? 0 : 0.18, t);
+        camera.lookAt(0, 0.06, 0);
+    }
+
+    function renderFrame() {
+        const dt = Math.min(clock.getDelta(), 0.05);
+        mouse.x = lerp(mouse.x, mouse.tx, 0.045);
+        mouse.y = lerp(mouse.y, mouse.ty, 0.045);
+        root.rotation.y = mouse.x * (reducedMotion ? 0 : 0.22);
+        root.rotation.x = mouse.y * (reducedMotion ? 0 : 0.1);
+
+        applyLayout(scrollState.hero);
+
+        if (!reducedMotion) {
+            globeSpin.rotation.y += dt * 0.085;
+            ringA.rotation.z += dt * 0.04;
+            ringB.rotation.z -= dt * 0.03;
+            pulses.forEach((p) => {
+                p.t = (p.t + dt * p.speed) % 1;
+                const path = p.path;
+                const idx = p.t * (path.length - 1);
+                const i0 = Math.floor(idx);
+                const i1 = Math.min(i0 + 1, path.length - 1);
+                p.spr.position.lerpVectors(path[i0], path[i1], idx - i0);
+                const pulse = 0.16 + Math.sin(p.t * Math.PI) * 0.06;
+                p.spr.scale.setScalar(pulse);
+            });
+            const pageT = scrollState.page;
+            panes.forEach((p) => {
+                p.mesh.rotation.y += dt * p.rotSpeed * 0.25;
+                p.mesh.rotation.x += dt * p.rotSpeed * 0.12;
+                p.mesh.position.y = p.base.y + Math.sin(clock.elapsedTime * 0.35 + p.phase) * 0.12 - pageT * 1.4;
+            });
+        }
+
+        renderer.render(scene, camera);
+    }
+
+    function loop() {
+        raf = 0;
+        if (!running) return;
+        renderFrame();
+        if (running) raf = requestAnimationFrame(loop);
+    }
+
+    function shouldRun() {
+        return visibleTab && !reducedMotion;
+    }
+
+    function start() {
+        if (running) return;
+        running = true;
+        clock.getDelta();
+        if (!raf) raf = requestAnimationFrame(loop);
+    }
+
+    function stop() {
+        running = false;
+        if (raf) {
+            cancelAnimationFrame(raf);
+            raf = 0;
+        }
+    }
+
+    function syncPlayback() {
+        if (shouldRun()) start();
+        else {
+            stop();
+            renderFrame();
+        }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        visibleTab = document.visibilityState !== 'hidden';
+        syncPlayback();
+    });
+
+    const io = new IntersectionObserver((entries) => {
+        canvasOnScreen = entries.some((e) => e.isIntersecting);
+        syncPlayback();
+    }, { threshold: 0 });
+    io.observe(holder);
+
+    let resizeTimer = 0;
+    const onResize = () => {
+        isMobile = window.innerWidth < 768;
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight, false);
+        readScroll();
+        if (!running) renderFrame();
+        if (window.ScrollTrigger) {
+            clearTimeout(resizeTimer);
+            resizeTimer = window.setTimeout(() => window.ScrollTrigger.refresh(), 120);
+        }
+    };
+    window.addEventListener('resize', onResize, { passive: true });
+
+    document.documentElement.classList.add('kosen-3d');
+    window.__kosen3d = true;
+
+    applyLayout(scrollState.hero);
+    renderFrame();
+    document.documentElement.dataset.kosen3dReady = '1';
+    window.__kosen3dDebug = () => ({
+        hero: scrollState.hero, page: scrollState.page,
+        pos: globeAnchor.position.toArray(), scale: globeAnchor.scale.x,
+        visible: globeAnchor.visible, cam: camera.position.toArray()
+    });
+    syncPlayback();
+
+    return {
+        dispose() {
+            stop();
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('resize', onResize);
+            io.disconnect();
+            renderer.dispose();
+            document.documentElement.classList.remove('kosen-3d');
+            delete document.documentElement.dataset.kosen3dReady;
+            window.__kosen3d = false;
+        }
+    };
+}
+
+function setupCardExperience() {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth < 768;
+    const cards = document.querySelectorAll(
+        '.solution-card, .case-card, .article-card, .sector-pill, .feature-card, .value-card, .form-card'
+    );
+
+    cards.forEach((card) => {
+        if (!reducedMotion) card.classList.add('reveal-3d');
+        if (!isMobile && !reducedMotion) {
+            card.classList.add('card-3d');
+            if (!card.querySelector('.card-glare')) {
+                const glare = document.createElement('span');
+                glare.className = 'card-glare';
+                glare.setAttribute('aria-hidden', 'true');
+                card.appendChild(glare);
+            }
+        }
+    });
+
+    if (!reducedMotion) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-in');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('.reveal-3d').forEach((el) => io.observe(el));
+    }
+
+    if (isMobile || reducedMotion) return;
+
+    const maxTilt = 8;
+    cards.forEach((card) => {
+        let frame = 0;
+        const onMove = (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            const rx = (0.5 - y) * maxTilt;
+            const ry = (x - 0.5) * (maxTilt + 2);
+            if (frame) cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(() => {
+                card.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+                card.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+                card.style.setProperty('--ty', '-6px');
+                card.style.setProperty('--gx', (x * 100).toFixed(1) + '%');
+                card.style.setProperty('--gy', (y * 100).toFixed(1) + '%');
+                card.classList.add('is-tilting');
+            });
+        };
+        const onLeave = () => {
+            if (frame) cancelAnimationFrame(frame);
+            card.style.setProperty('--rx', '0deg');
+            card.style.setProperty('--ry', '0deg');
+            card.style.setProperty('--ty', '0px');
+            card.classList.remove('is-tilting');
+        };
+        card.addEventListener('mousemove', onMove);
+        card.addEventListener('mouseleave', onLeave);
+    });
+
+    const band = document.querySelector('.solutions-band .grid');
+    if (band) {
+        const cells = band.querySelectorAll('.solution-card');
+        band.addEventListener('mousemove', (e) => {
+            const rect = band.getBoundingClientRect();
+            const nx = (e.clientX - rect.left) / rect.width - 0.5;
+            const ny = (e.clientY - rect.top) / rect.height - 0.5;
+            cells.forEach((cell, i) => {
+                const depth = (i % 2 === 0 ? 1 : -1) * 6;
+                cell.style.setProperty('--rx', (-ny * 4).toFixed(2) + 'deg');
+                cell.style.setProperty('--ry', (nx * 5).toFixed(2) + 'deg');
+                cell.style.setProperty('--tz', (depth + Math.abs(nx) * 8).toFixed(1) + 'px');
+            });
+        });
+        band.addEventListener('mouseleave', () => {
+            cells.forEach((cell) => {
+                cell.style.setProperty('--rx', '0deg');
+                cell.style.setProperty('--ry', '0deg');
+                cell.style.setProperty('--tz', '0px');
+            });
+        });
+    }
+}
+
+try {
+    const world = await initKosen3D();
+    if (world) {
+        setupCardExperience();
+    }
+} catch (err) {
+    document.documentElement.classList.remove('kosen-3d');
+    delete document.documentElement.dataset.kosen3dReady;
+    window.__kosen3d = false;
+}
     </script>
 </body>
 </html>
