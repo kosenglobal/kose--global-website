@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="supported-color-schemes" content="light">
+    <meta name="theme-color" content="#FFFFFF">
     <title>Kosen Global | Values-Driven Legal Excellence</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' };</script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         
@@ -16,12 +20,21 @@
             --beige: #FFFFFF;
             --cream: #F8F8F6;
             --dark-text: #0F2316;
+            color-scheme: light only;
+            color-scheme: only light;
+        }
+
+        html {
+            background-color: #FFFFFF;
+            color-scheme: light only;
+            color-scheme: only light;
         }
         
         body {
             font-family: 'Hanken Grotesk', Arial, sans-serif;
             background-color: #FFFFFF;
             color: #0F2316;
+            color-scheme: light only;
         }
         
         .heading-serif {
@@ -275,10 +288,11 @@
             display: block;
             width: 100%;
             height: 100%;
+            background: #FFFFFF;
         }
-        html.kosen-3d #kosen-bg { display: block; }
+        html.kosen-3d #kosen-bg { display: block; background: #FFFFFF; }
         html.kosen-3d,
-        html.kosen-3d body { background: transparent; }
+        html.kosen-3d body { background: #FFFFFF; }
         html.kosen-3d body > *:not(#kosen-bg):not(nav):not(.scene-vignette) {
             position: relative;
             z-index: 1;
