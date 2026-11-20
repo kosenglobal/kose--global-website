@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- kosen-site-v29 -->
+    <!-- kosen-site-v33 -->
     <!--
       Safari 27.3 Adaptive Dark Mode leaves a page alone when it declares
       light+dark support (WebKit, 3 Nov 2026). The "only" keyword, used in v28,
@@ -584,6 +584,32 @@
                 color: #0F2316;
             }
         }
+
+        /* ===== v32 bespoke line-icon system (darker) ===== */
+        .k-mark { position: relative; border: 1px solid rgba(15,35,22,0.45); background: transparent; transition: border-color .45s ease, background-color .45s ease; }
+        .k-mark::after { content: ""; position: absolute; top: -2.5px; left: 50%; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: #B8964F; box-shadow: 0 0 0 2px #FFFFFF; transition: background-color .45s ease, transform .45s ease; }
+        .k-ico { width: 26px; height: 26px; display: block; fill: none; stroke: #0F2316; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; overflow: visible; shape-rendering: geometricPrecision; }
+        .value-card .k-ico { width: 24px; height: 24px; stroke-width: 1.75; }
+        .k-ico .acc { stroke: #B8964F; transition: stroke .45s ease; }
+        .k-ico .fill { fill: #0F2316; stroke: none; }
+        .k-ico .acc-fill { fill: #B8964F; }
+        .k-ico-sm { width: 15px; height: 15px; stroke-width: 2.7; flex-shrink: 0; }
+        .card-line:hover .k-mark { border-color: rgba(184,150,79,0.9); background-color: rgba(184,150,79,0.06); }
+        .card-line:hover .k-mark::after { background: #9E7D3A; transform: scale(1.25); }
+        .card-line:hover .k-ico .acc { stroke: #9E7D3A; }
+        .card-line:hover .k-ico [pathLength] { stroke-dasharray: 1 1; animation: k-draw .9s cubic-bezier(.65,0,.35,1) both; }
+        .card-line:hover .k-ico .acc[pathLength] { animation-delay: .25s; }
+        @keyframes k-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+        @media (prefers-reduced-motion: reduce) {
+            .k-mark, .k-mark::after, .k-ico .acc { transition: none; }
+            .card-line:hover .k-mark::after { transform: none; }
+            .card-line:hover .k-ico [pathLength] { animation: none; stroke-dasharray: none; }
+        }
+        @media (prefers-color-scheme: dark) {
+            .k-mark { background: transparent; }
+            .k-mark::after { box-shadow: 0 0 0 2px #FFFFFF; }
+            .k-ico { stroke: #0F2316; }
+        }
     </style>
 
     <link rel="icon" href="data:,">
@@ -686,17 +712,17 @@
 
             <div class="mt-12 pt-6 border-t border-[#0F2316]/10 hero-marks max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-3 text-[11.5px] uppercase tracking-[0.14em] sm:tracking-[0.2em]">
                 <div class="flex items-center gap-x-2.5 text-[#1E3A22] whitespace-nowrap">
-                    <i class="fa-solid fa-globe text-[#1E3A22]"></i>
+                    <svg class="k-ico k-ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle pathLength="1" cx="12" cy="12" r="8.5"/><ellipse pathLength="1" cx="12" cy="12" rx="3.6" ry="8.5"/><path pathLength="1" d="M3.5 12h17M4.8 7.5h14.4M4.8 16.5h14.4"/><path pathLength="1" class="acc" d="M12 1.5v2M12 20.5v2"/></svg>
                     <span class="font-semibold">Global Reach</span>
                 </div>
                 <div class="hidden sm:block w-px h-3 bg-[#0F2316]/20"></div>
                 <div class="flex items-center gap-x-2.5 text-[#1E3A22] whitespace-nowrap">
-                    <i class="fa-solid fa-award text-[#1E3A22]"></i>
+                    <svg class="k-ico k-ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle pathLength="1" cx="12" cy="9.5" r="5.5"/><circle pathLength="1" class="acc" cx="12" cy="9.5" r="2.4"/><path pathLength="1" d="M9.3 14.4L8 21l2.4-1.2L12 21.8M14.7 14.4L16 21l-2.4-1.2L12 21.8"/></svg>
                     <span class="font-semibold">Excellent Talent</span>
                 </div>
                 <div class="hidden sm:block w-px h-3 bg-[#0F2316]/20"></div>
                 <div class="flex items-center gap-x-2.5 text-[#1E3A22] whitespace-nowrap">
-                    <i class="fa-solid fa-bolt text-[#1E3A22]"></i>
+                    <svg class="k-ico k-ico-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle pathLength="1" cx="12" cy="12" r="7"/><path pathLength="1" d="M12 8.2V12l2.6 1.8"/><path pathLength="1" class="acc" d="M12 2a10 10 0 0 1 10 10"/><path pathLength="1" class="acc" d="M20.1 10.3l1.9 1.9 1.6-2.1"/></svg>
                     <span class="font-semibold">Speedy Response</span>
                 </div>
             </div>
@@ -756,12 +782,6 @@
                     <p class="text-[#EEF4EF] text-[15.5px] leading-[1.75] md:pl-[60px]">We deliver legal advisory that is commercially sharp, legally sound, and execution-focused — designed to move business forward while staying case-free and risk-aware.</p>
                 </div>
             </div>
-
-            <div class="mt-14 text-center">
-                <p class="text-[#EEF4EF] text-[17px] leading-[1.7] max-w-2xl mx-auto">
-                    <span class="font-semibold text-white">About the time:</span> Hiring Indian potential for global outcomes — building high-calibre legal talent that delivers international impact.
-                </p>
-            </div>
         </div>
     </section>
 
@@ -808,7 +828,6 @@
         <div class="text-center mb-8 md:mb-10">
             <div class="eyebrow eyebrow-rule mb-5">INSIGHTS & THOUGHT LEADERSHIP</div>
             <h2 class="section-header">Articles & News</h2>
-            <p class="section-lede mt-5 max-w-2xl mx-auto">Expert perspectives on law, business, and global developments. New posts appear regularly on our blog.</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -860,37 +879,36 @@
         <div class="text-center mb-8 md:mb-10">
             <div class="eyebrow eyebrow-rule mb-5">WHERE WE CREATE IMPACT</div>
             <h2 class="section-header">Sectors We Serve</h2>
-            <p class="section-lede mt-5 max-w-xl mx-auto">Deep expertise across industries that demand both precision and principled counsel.</p>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
             <div class="sector-pill group card-line px-4 py-7 md:p-8 rounded-[3px] text-center">
-                <div class="icon-sq icon-solid mx-auto mb-6 w-12 h-12 rounded-[2px] flex items-center justify-center">
-                    <i class="fa-solid fa-shopping-basket text-white text-lg"></i>
+                <div class="k-mark mx-auto mb-6 w-12 h-12 rounded-full flex items-center justify-center">
+                    <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M6.25 2.5h2.5M6.5 2.5v3.3c-1.6.9-2.5 2.2-2.5 4v10.7h7V9.8c0-1.8-.9-3.1-2.5-4V2.5"/><path pathLength="1" class="acc" d="M5.75 12.5h3.5v4h-3.5z"/><path pathLength="1" d="M13 13h7.5v7.5H13zM13 15.5h7.5"/><path pathLength="1" d="M15.75 13v2.5M17.75 13v2.5"/><path pathLength="1" d="M2.5 20.5h19"/></svg>
                 </div>
                 <div class="card-title !text-[1.6rem] mb-2">FMCG</div>
                 <div class="text-[12px] font-semibold uppercase tracking-[0.14em] text-[#0F2316]">Fast-moving consumer goods</div>
             </div>
             
             <div class="sector-pill group card-line px-4 py-7 md:p-8 rounded-[3px] text-center">
-                <div class="icon-sq icon-solid mx-auto mb-6 w-12 h-12 rounded-[2px] flex items-center justify-center">
-                    <i class="fa-solid fa-file-contract text-white text-lg"></i>
+                <div class="k-mark mx-auto mb-6 w-12 h-12 rounded-full flex items-center justify-center">
+                    <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M12.5 21H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8l4.5 4.5V12"/><path pathLength="1" d="M14 3v4.5h4.5M8 9h4.5M8 12h7M8 15h3.5"/><circle pathLength="1" class="acc" cx="17" cy="16.3" r="3"/><circle pathLength="1" class="acc" cx="17" cy="16.3" r="1.1"/><path pathLength="1" class="acc" d="M15.4 18.9l-.7 3.4 2.3-1.1 2.3 1.1-.7-3.4"/></svg>
                 </div>
                 <div class="card-title !text-[1.6rem] mb-2">Licensing</div>
                 <div class="text-[12px] font-semibold uppercase tracking-[0.14em] text-[#0F2316]">Regulatory & compliance</div>
             </div>
             
             <div class="sector-pill group card-line px-4 py-7 md:p-8 rounded-[3px] text-center">
-                <div class="icon-sq icon-solid mx-auto mb-6 w-12 h-12 rounded-[2px] flex items-center justify-center">
-                    <i class="fa-solid fa-store text-white text-lg"></i>
+                <div class="k-mark mx-auto mb-6 w-12 h-12 rounded-full flex items-center justify-center">
+                    <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M5 4h14l1.5 5h-17z"/><path pathLength="1" d="M8.5 4l-.75 5M12 4v5M15.5 4l.75 5"/><path pathLength="1" d="M3.5 9a2.125 2.125 0 0 0 4.25 0 2.125 2.125 0 0 0 4.25 0 2.125 2.125 0 0 0 4.25 0 2.125 2.125 0 0 0 4.25 0"/><path pathLength="1" d="M5 11.6v8.9M19 11.6v8.9M2.5 20.5h19"/><path pathLength="1" class="acc" d="M10 20.5V15h4v5.5"/></svg>
                 </div>
                 <div class="card-title !text-[1.6rem] mb-2">Retail</div>
                 <div class="text-[12px] font-semibold uppercase tracking-[0.14em] text-[#0F2316]">Consumer & commerce</div>
             </div>
             
             <div class="sector-pill group card-line px-4 py-7 md:p-8 rounded-[3px] text-center">
-                <div class="icon-sq icon-solid mx-auto mb-6 w-12 h-12 rounded-[2px] flex items-center justify-center">
-                    <i class="fa-solid fa-heartbeat text-white text-lg"></i>
+                <div class="k-mark mx-auto mb-6 w-12 h-12 rounded-full flex items-center justify-center">
+                    <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M9.75 3.5h4.5v3.75H18v4.5h-3.75v3.75h-4.5v-3.75H6v-4.5h3.75z"/><path pathLength="1" class="acc" d="M2.5 19h5.75l1.25-2 1.75 4 1.75-5 1.25 3h7.25"/></svg>
                 </div>
                 <div class="card-title !text-[1.6rem] mb-2">Healthcare</div>
                 <div class="text-[12px] font-semibold uppercase tracking-[0.14em] text-[#0F2316]">Life sciences & wellness</div>
@@ -907,29 +925,29 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
             <div class="card-line feature-card px-4 py-7 md:p-8 rounded-[3px] text-center">
-                <div class="icon-sq w-12 h-12 mx-auto mb-6 rounded-[2px] flex items-center justify-center">
-                    <i class="fa-solid fa-wallet text-[#1E3A22] text-lg"></i>
+                <div class="k-mark w-12 h-12 mx-auto mb-6 rounded-full flex items-center justify-center">
+                    <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle pathLength="1" cx="12" cy="15.5" r="5.5"/><path pathLength="1" d="M12 13.5v4"/><path pathLength="1" class="acc" d="M12 10V6.5M12 7.5c0-2 1.5-3.5 4-3.5 0 2-1.5 3.5-4 3.5zM12 8.5c0-1.6-1.2-2.8-3.2-2.8 0 1.6 1.2 2.8 3.2 2.8z"/></svg>
                 </div>
                 <div class="card-title mb-3">Affordable</div>
                 <p class="text-sm text-[#0F2316]">Premium legal support without premium pricing.</p>
             </div>
             <div class="card-line feature-card px-4 py-7 md:p-8 rounded-[3px] text-center">
-                <div class="icon-sq w-12 h-12 mx-auto mb-6 rounded-[2px] flex items-center justify-center">
-                    <i class="fa-solid fa-globe text-[#1E3A22] text-lg"></i>
+                <div class="k-mark w-12 h-12 mx-auto mb-6 rounded-full flex items-center justify-center">
+                    <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle pathLength="1" cx="12" cy="12" r="8.5"/><ellipse pathLength="1" cx="12" cy="12" rx="3.6" ry="8.5"/><path pathLength="1" d="M3.5 12h17M4.8 7.5h14.4M4.8 16.5h14.4"/><path pathLength="1" class="acc" d="M12 1.5v2M12 20.5v2"/></svg>
                 </div>
                 <div class="card-title mb-3">International Outlook</div>
                 <p class="text-sm text-[#0F2316]">Deep understanding of global business and cross-border matters.</p>
             </div>
             <div class="card-line feature-card px-4 py-7 md:p-8 rounded-[3px] text-center">
-                <div class="icon-sq w-12 h-12 mx-auto mb-6 rounded-[2px] flex items-center justify-center">
-                    <i class="fa-solid fa-bolt text-[#1E3A22] text-lg"></i>
+                <div class="k-mark w-12 h-12 mx-auto mb-6 rounded-full flex items-center justify-center">
+                    <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle pathLength="1" cx="12" cy="12" r="7"/><path pathLength="1" d="M12 8.2V12l2.6 1.8"/><path pathLength="1" class="acc" d="M12 2a10 10 0 0 1 10 10"/><path pathLength="1" class="acc" d="M20.1 10.3l1.9 1.9 1.6-2.1"/></svg>
                 </div>
                 <div class="card-title mb-3">Quick Turnaround</div>
                 <p class="text-sm text-[#0F2316]">Fast, responsive, and deadline-driven delivery.</p>
             </div>
             <div class="card-line feature-card px-4 py-7 md:p-8 rounded-[3px] text-center">
-                <div class="icon-sq w-12 h-12 mx-auto mb-6 rounded-[2px] flex items-center justify-center">
-                    <i class="fa-solid fa-balance-scale text-[#1E3A22] text-lg"></i>
+                <div class="k-mark w-12 h-12 mx-auto mb-6 rounded-full flex items-center justify-center">
+                    <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M12 4.6V20M8 20.5h8M4.5 7h15"/><path pathLength="1" d="M4.5 7l-2 6M4.5 7l2 6M2.5 13h4a2 2 0 0 1-4 0M19.5 7l-2 6M19.5 7l2 6M17.5 13h4a2 2 0 0 1-4 0"/><circle pathLength="1" class="acc" cx="12" cy="3.5" r="1.1"/></svg>
                 </div>
                 <div class="card-title mb-3">Legally Accurate</div>
                 <p class="text-sm text-[#0F2316]">Precision-first approach with zero compromise on quality.</p>
@@ -942,7 +960,7 @@
         <div class="text-center mb-16">
             <div class="eyebrow eyebrow-rule mb-5">OUR FOUNDATION</div>
             <h2 class="section-header">Charter of Values</h2>
-            <p class="section-lede mt-5 max-w-2xl mx-auto">These six principles guide every decision, every advisory, and every mentorship interaction at Kosen.</p>
+            <p class="section-lede mt-5 max-w-2xl mx-auto">Six principles guiding every decision at Kosen.</p>
         </div>
 
         <!-- 2 Column Layout: Left Column = Values 1,2,3 | Right Column = Values 4,5,6 -->
@@ -951,78 +969,72 @@
             <div class="value-card tilt-card group card-line p-8 md:p-9 rounded-[3px] flex flex-col h-full" data-tilt>
                 <div class="relative mb-7">
                     <div class="value-number text-[#1E3A22]">01</div>
-                    <div class="icon-sq w-11 h-11 rounded-[2px] flex items-center justify-center">
-                        <i class="fa-solid fa-handshake text-[#1E3A22] text-lg"></i>
+                    <div class="k-mark w-11 h-11 rounded-full flex items-center justify-center">
+                        <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle pathLength="1" cx="12" cy="12" r="8.5"/><circle pathLength="1" cx="12" cy="12" r="4.75"/><circle class="fill" cx="12" cy="12" r="1.35"/><path pathLength="1" class="acc" d="M21 3l-7.6 7.6M21 3h-3M21 3v3"/></svg>
                     </div>
                 </div>
                 <h3 class="card-title mb-3 pr-4">Impact</h3>
                 <p class="text-[#0F2316] text-[15.5px] leading-[1.75] flex-grow">We are driven by impact, not activity. We measure success by the quality of outcomes we create, delivering advice that is practical, principled and effective.</p>
-                <div class="card-foot mt-7 pt-5">OUTCOMES OVER ACTIVITY</div>
             </div>
 
             <!-- Value 2 -->
             <div class="value-card tilt-card group card-line p-8 md:p-9 rounded-[3px] flex flex-col h-full" data-tilt>
                 <div class="relative mb-7">
                     <div class="value-number text-[#1E3A22]">02</div>
-                    <div class="icon-sq w-11 h-11 rounded-[2px] flex items-center justify-center">
-                        <i class="fa-solid fa-balance-scale text-[#1E3A22] text-lg"></i>
+                    <div class="k-mark w-11 h-11 rounded-full flex items-center justify-center">
+                        <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M3.5 8.5h17L12 3.5z"/><path pathLength="1" d="M4.5 10.5h15M6.2 10.5V18M7.8 10.5V18M11.2 10.5V18M12.8 10.5V18M16.2 10.5V18M17.8 10.5V18M4.5 18h15M3 20.5h18"/><circle pathLength="1" class="acc" cx="12" cy="6.6" r=".9"/></svg>
                     </div>
                 </div>
                 <h3 class="card-title mb-3 pr-4">Championing What is Right</h3>
                 <p class="text-[#0F2316] text-[15.5px] leading-[1.75] flex-grow">We uphold the belief that law is not just a profession, but a powerful tool to create fairer societies and stronger institutions. We build lawyers who stand for integrity, justice, and constructive impact.</p>
-                <div class="card-foot mt-7 pt-5">JUSTICE & INTEGRITY</div>
             </div>
 
             <!-- Value 3 -->
             <div class="value-card tilt-card group card-line p-8 md:p-9 rounded-[3px] flex flex-col h-full" data-tilt>
                 <div class="relative mb-7">
                     <div class="value-number text-[#1E3A22]">03</div>
-                    <div class="icon-sq w-11 h-11 rounded-[2px] flex items-center justify-center">
-                        <i class="fa-solid fa-rocket text-[#1E3A22] text-lg"></i>
+                    <div class="k-mark w-11 h-11 rounded-full flex items-center justify-center">
+                        <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M2.5 20h19M2.5 20L9.5 9l3.5 5 2.5-3.5 6 9.5"/><path pathLength="1" d="M9.5 9V3.5"/><path pathLength="1" class="acc" d="M9.5 3.5H14l-1.2 1.5L14 6.5H9.5"/></svg>
                     </div>
                 </div>
                 <h3 class="card-title mb-3 pr-4">Relentless Pursuit of Excellence</h3>
                 <p class="text-[#0F2316] text-[15.5px] leading-[1.75] flex-grow">We are committed to continuous improvement, both in ourselves and our learners. At Kosen, growth is the standard. A growth mindset in action.</p>
-                <div class="card-foot mt-7 pt-5">GROWTH MINDSET</div>
             </div>
 
             <!-- Value 4 -->
             <div class="value-card tilt-card group card-line p-8 md:p-9 rounded-[3px] flex flex-col h-full" data-tilt>
                 <div class="relative mb-7">
                     <div class="value-number text-[#1E3A22]">04</div>
-                    <div class="icon-sq w-11 h-11 rounded-[2px] flex items-center justify-center">
-                        <i class="fa-solid fa-eye text-[#1E3A22] text-lg"></i>
+                    <div class="k-mark w-11 h-11 rounded-full flex items-center justify-center">
+                        <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M2.5 12C5 7.5 8.3 5.5 12 5.5s7 2 9.5 6.5c-2.5 4.5-5.8 6.5-9.5 6.5s-7-2-9.5-6.5z"/><circle pathLength="1" cx="12" cy="12" r="3.2"/><circle pathLength="1" class="fill acc-fill" cx="12" cy="12" r="1.15"/></svg>
                     </div>
                 </div>
                 <h3 class="card-title mb-3 pr-4">Radical Honesty & Genuine Care</h3>
                 <p class="text-[#0F2316] text-[15.5px] leading-[1.75] flex-grow">We operate with a deep respect for truth, transparency, and kindness. Whether in the sessions or in our community, we speak with clarity and listen with care.</p>
-                <div class="card-foot mt-7 pt-5">TRANSPARENCY & KINDNESS</div>
             </div>
 
             <!-- Value 5 -->
             <div class="value-card tilt-card group card-line p-8 md:p-9 rounded-[3px] flex flex-col h-full" data-tilt>
                 <div class="relative mb-7">
                     <div class="value-number text-[#1E3A22]">05</div>
-                    <div class="icon-sq w-11 h-11 rounded-[2px] flex items-center justify-center">
-                        <i class="fa-solid fa-sun text-[#1E3A22] text-lg"></i>
+                    <div class="k-mark w-11 h-11 rounded-full flex items-center justify-center">
+                        <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M2.5 17h19M7 17a5 5 0 0 1 10 0M7 20.2h10"/><path pathLength="1" class="acc" d="M12 10V8M15.5 10.9l1-1.7M8.5 10.9l-1-1.7M18.1 13.5l1.7-1M5.9 13.5l-1.7-1"/></svg>
                     </div>
                 </div>
                 <h3 class="card-title mb-3 pr-4">Positivity & Great Energy</h3>
                 <p class="text-[#0F2316] text-[15.5px] leading-[1.75] flex-grow">We bring bright energy into everything we do. Inspired by optimism and impact, we believe that a positive mindset fuels better learning, stronger communities, and more courageous lawyers.</p>
-                <div class="card-foot mt-7 pt-5">ENERGY IS CONTAGIOUS</div>
             </div>
 
             <!-- Value 6 -->
             <div class="value-card tilt-card group card-line p-8 md:p-9 rounded-[3px] flex flex-col h-full" data-tilt>
                 <div class="relative mb-7">
                     <div class="value-number text-[#1E3A22]">06</div>
-                    <div class="icon-sq w-11 h-11 rounded-[2px] flex items-center justify-center">
-                        <i class="fa-solid fa-handshake text-[#1E3A22] text-lg"></i>
+                    <div class="k-mark w-11 h-11 rounded-full flex items-center justify-center">
+                        <svg class="k-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle pathLength="1" cx="12" cy="12" r="8.5"/><path pathLength="1" d="M12 5.5l2 6.5-2 6.5-2-6.5z"/><path pathLength="1" class="acc" d="M12 5.5l2 6.5h-4z"/><path pathLength="1" d="M3.5 12H5M19 12h1.5"/></svg>
                     </div>
                 </div>
                 <h3 class="card-title mb-3 pr-4">Practical Mentorship</h3>
                 <p class="text-[#0F2316] text-[15.5px] leading-[1.75] flex-grow">We believe in mentoring not from a pedestal, but as elder siblings in the profession. We walk alongside learners, offering practical wisdom and support rooted in lived experience.</p>
-                <div class="card-foot mt-7 pt-5">GUIDANCE WITH EMPATHY</div>
             </div>
         </div>
 
@@ -1032,26 +1044,8 @@
         </div>
     </section>
 
-    <!-- CTA Banner -->
-    <div class="max-w-6xl mx-auto px-6 md:px-8 pb-10 md:pb-12">
-        <div class="cta-band bg-[#1E3A22] rounded-[3px] px-6 md:px-12 py-16 md:py-20 text-center text-white relative overflow-hidden">
-            <div class="relative z-10">
-                <h3 class="cta-title mb-5">Join us in revolutionising access<br>to ideas and law.</h3>
-                <p class="max-w-md mx-auto text-[#EEF4EF] text-[16px] leading-[1.7] mb-10">Whether you're an aspiring legal professional or a forward-thinking enterprise, Kosen is ready to partner with you.</p>
-                
-                <a href="#contact" 
-                   class="btn-sq btn-on-dark inline-flex items-center justify-center gap-x-3 px-8 py-4 bg-white text-[#1E3A22] font-semibold tracking-[0.03em] rounded-[2px] hover:bg-[#EEF3EF] transition-all text-[15px]">
-                    Start the Conversation
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-            <!-- subtle glow -->
-            <div class="cta-lines absolute inset-0 pointer-events-none"></div>
-        </div>
-    </div>
-
     <!-- Contact Section -->
-    <section id="contact" class="max-w-5xl mx-auto px-6 md:px-8 pb-12">
+    <section id="contact" class="max-w-5xl mx-auto px-6 md:px-8 pt-10 md:pt-12 pb-12">
         <div class="text-center mb-8 md:mb-10">
             <div class="eyebrow eyebrow-rule mb-5">LET'S CONNECT</div>
             <h2 class="section-header">Get in touch with Kosen Global</h2>
@@ -1078,12 +1072,12 @@
                 </div>
 
                 <div class="pt-8 border-t border-[#0F2316]/10">
-                    <div class="eyebrow mb-2">FOR LEGAL PROFESSIONALS</div>
-                    <div class="text-[15px] leading-[1.6] text-[#0F2316]">Mentorship programs • Workshops • Community</div>
+                    <div class="eyebrow mb-2">FOR ORGANISATIONS</div>
+                    <div class="text-[15px] leading-[1.6] text-[#0F2316]">Retainer Advisory • Contract Management • Business Structuring • Intellectual Property • Data Protection • Technology Law</div>
                 </div>
                 <div>
-                    <div class="eyebrow mb-2">FOR ORGANIZATIONS</div>
-                    <div class="text-[15px] leading-[1.6] text-[#0F2316]">Retainer advisory • Compliance programs • Risk frameworks</div>
+                    <div class="eyebrow mb-2">FOR LEGAL PROFESSIONALS</div>
+                    <div class="text-[15px] leading-[1.6] text-[#0F2316]">Mentorship programs • Workshops • Community</div>
                 </div>
             </div>
 
