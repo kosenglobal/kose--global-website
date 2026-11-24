@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- kosen-site-v35 -->
+    <!-- kosen-site-v36 -->
     <!--
       Safari 27.3 Adaptive Dark Mode leaves a page alone when it declares
       light+dark support (WebKit, 3 Nov 2026). The "only" keyword, used in v28,
@@ -662,7 +662,7 @@
                 </div>
 
                 <div class="hidden md:flex items-center gap-x-4">
-                    <a href="https://script.google.com/a/macros/kosen.law/s/AKfycbyvqSx6PIW76PyJMVhG_C9wDzPjvNFtBLHQpv4uaZkeJrS3xXwAjRlWDfojabvlPpQzHg/exec" data-crm-link class="nav-login" aria-label="Login to Kosen CRM (Kosen staff only)"><svg class="nav-login-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="1.6"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/><circle class="acc" cx="12" cy="15.2" r="1.15"/></svg><span>Login</span></a>
+                    <a href="/login/" data-crm-link class="nav-login" aria-label="Login to Kosen CRM (Kosen staff only)"><svg class="nav-login-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="1.6"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/><circle class="acc" cx="12" cy="15.2" r="1.15"/></svg><span>Login</span></a>
                     <span class="nav-divider" aria-hidden="true"></span>
                     <a href="#contact" 
                        class="btn-sq btn-secondary px-5 py-2.5 text-[13px] font-semibold tracking-[0.04em] text-[#0F2316] border border-[#0F2316]/25 rounded-[2px] hover:border-[#2C5530] hover:text-[#2C5530] transition-all">
@@ -676,7 +676,7 @@
 
                 <!-- Mobile: compact Login + menu button -->
                 <div class="md:hidden flex items-center gap-x-2">
-                <a href="https://script.google.com/a/macros/kosen.law/s/AKfycbyvqSx6PIW76PyJMVhG_C9wDzPjvNFtBLHQpv4uaZkeJrS3xXwAjRlWDfojabvlPpQzHg/exec" data-crm-link class="nav-login-m" aria-label="Login to Kosen CRM (Kosen staff only)"><svg class="nav-login-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="1.6"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/><circle class="acc" cx="12" cy="15.2" r="1.15"/></svg><span>Login</span></a>
+                <a href="/login/" data-crm-link class="nav-login-m" aria-label="Login to Kosen CRM (Kosen staff only)"><svg class="nav-login-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="1.6"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/><circle class="acc" cx="12" cy="15.2" r="1.15"/></svg><span>Login</span></a>
                 <button id="mobile-menu-btn"
                         class="md:hidden w-10 h-10 flex items-center justify-center text-[#1E3A22]">
                     <i class="fa-solid fa-bars text-xl"></i>
@@ -696,7 +696,7 @@
                 <a href="#values" class="py-3 border-b border-[#0F2316]/[0.08] text-[#0F2316]">Charter</a>
                 <div class="pt-4 flex flex-col gap-y-3">
                     <a href="#contact" class="py-3 text-center border border-[#0F2316]/25 rounded-[2px] text-[#0F2316] font-semibold">Contact Us</a>
-                    <a href="https://script.google.com/a/macros/kosen.law/s/AKfycbyvqSx6PIW76PyJMVhG_C9wDzPjvNFtBLHQpv4uaZkeJrS3xXwAjRlWDfojabvlPpQzHg/exec" data-crm-link class="mm-login py-3 text-center border border-[#B8964F]/60 rounded-[2px] text-[#0F2316] font-semibold"><svg class="nav-login-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="1.6"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/><circle class="acc" cx="12" cy="15.2" r="1.15"/></svg><span>Login to Kosen CRM</span></a>
+                    <a href="/login/" data-crm-link class="mm-login py-3 text-center border border-[#B8964F]/60 rounded-[2px] text-[#0F2316] font-semibold"><svg class="nav-login-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="1.6"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/><circle class="acc" cx="12" cy="15.2" r="1.15"/></svg><span>Login to Kosen CRM</span></a>
                     <a href="https://kosenlaw.blog" target="_blank" rel="noopener" class="btn-primary py-3 text-center bg-[#2C5530] text-white rounded-[2px] font-semibold">Blog</a>
                 </div>
             </div>
@@ -2076,11 +2076,10 @@ try {
 }
     </script>
     <script>
-      // v35: Kosen CRM login. The CRM runs inside Kosen's Google Workspace (Apps Script web app,
-      // access limited to kosen.law accounts). Only this link is on the public site.
-      // Replace the placeholder with the deployment's /exec URL before publishing.
-      const KOSEN_CRM_URL = "https://script.google.com/a/macros/kosen.law/s/AKfycbyvqSx6PIW76PyJMVhG_C9wDzPjvNFtBLHQpv4uaZkeJrS3xXwAjRlWDfojabvlPpQzHg/exec";
-      document.querySelectorAll('[data-crm-link]').forEach(function (a) { a.href = KOSEN_CRM_URL; });
+      // v36: Kosen CRM login. Login opens kosen.law/login/ in the same tab; that page shows the CRM
+      // (Apps Script web app, kosen.law accounts only) inside the site. Only this link is on the public site.
+      const KOSEN_LOGIN_URL = "/login/";
+      document.querySelectorAll('[data-crm-link]').forEach(function (a) { a.href = KOSEN_LOGIN_URL; a.removeAttribute('target'); });
     </script>
 </body>
 </html>
